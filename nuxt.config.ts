@@ -5,4 +5,11 @@ export default defineNuxtConfig({
     strict: true,
     typeCheck: true,
   },
+  css: ["~/assets/css/main.css"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
 });
