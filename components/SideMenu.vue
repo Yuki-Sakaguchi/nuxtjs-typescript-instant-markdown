@@ -1,23 +1,27 @@
 <script setup lang="ts">
 import { PlusIcon, TrashIcon } from "@heroicons/vue/24/outline";
+
 const config = useAppConfig();
 
-const displayList = [
-  {
-    id: "6393cd38-1e5e-4953-8dd7-357a86f04c2c",
-    title: "title1",
-    createdAt: "2023-11-06T08:38:43.700Z",
-    updatedAt: "2023-11-06T09:10:22.886Z",
-    body: "body1",
-  },
-  {
-    id: "5393cd38-1e5e-4953-8dd7-357a86f04c2c",
-    title: "title2",
-    createdAt: "2023-11-06T08:38:43.700Z",
-    updatedAt: "2023-11-06T09:10:22.886Z",
-    body: "body2",
-  },
-];
+const store = useList();
+const { list, selectedItem } = storeToRefs(store);
+const { addItem, deleteAll } = store;
+
+const displayList = computed(() => {
+  return list.value.sort((a, b) => {
+    const aDate = new Date(a.createdAt).getTime();
+    const bDate = new Date(b.createdAt).getTime();
+    if (aDate > bDate) return -1;
+    else if (aDate < bDate) return 1;
+    else return 0;
+  });
+});
+
+function deleteAllItem() {
+  if (confirm("全ての記事を削除してもよろしいでしょうか")) {
+    deleteAll();
+  }
+}
 </script>
 
 <template>
@@ -30,12 +34,14 @@ const displayList = [
     </h1>
     <button
       class="bg-white text-gray-800 w-full py-2 rounded-tr-md rounded-bl-md transition-opacity hover:opacity-80"
+      @click="addItem"
     >
       <PlusIcon class="w-[20px] m-auto" />
     </button>
     <template v-if="displayList.length > 0">
       <button
         class="mt-2 bg-white text-gray-800 w-full py-2 rounded-tr-md rounded-bl-md transition-opacity hover:opacity-80"
+        @click="deleteAllItem"
       >
         <TrashIcon class="w-[20px] m-auto" />
       </button>
@@ -48,7 +54,7 @@ const displayList = [
             :key="item.id"
             :id="item.id"
             :title="item.title"
-            :selected="false"
+            :selected="item === selectedItem"
           />
         </ul>
       </template>
