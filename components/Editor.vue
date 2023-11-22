@@ -14,7 +14,7 @@ const isOpenModal = ref(false);
 
 const store = useList();
 const { selectedItem } = storeToRefs(store);
-const { removeItem } = store;
+const { removeItem, onChange } = store;
 
 const { isComposing } = useComposing();
 
@@ -48,9 +48,10 @@ function onUpdate() {
   if (editor == null) return;
   if (updateTimer.value) clearTimeout(updateTimer.value);
   updateTimer.value = setTimeout(() => {
-    if (isComposing) return;
-    // cursorPoint.value = editor.state.selection.anchor;
-    // onchange(editor.getHTML());
+    if (isComposing.value) return;
+    if (editor.value == null) return;
+    cursorPoint.value = editor.value.state.selection.anchor;
+    onChange(editor.value.getHTML());
   }, 400);
 }
 
@@ -65,16 +66,17 @@ function formatDate(date: Date) {
   return format(new Date(date), "yyyy-MM-dd HH:mm:ss");
 }
 
-// watchEffect(() => {
-//   onUpdate();
-// });
+watch(isComposing, () => {
+  onUpdate();
+});
 
-// watch([selectedItem, editor], () => {
-//   if (editor == null || selectedItem == null) return;
-//   // editor.commands.setContent(selectedItem.body);
-//   // editor.commands.focus(cursorPoint);
-//   // if (!editor.isFocused) editor.commands.focus();
-// });
+watch([selectedItem, editor], () => {
+  if (editor == null || selectedItem == null) return;
+  if (editor.value == null || selectedItem.value == null) return;
+  editor.value.commands.setContent(selectedItem.value.body);
+  editor.value.commands.focus(cursorPoint.value);
+  if (!editor.value.isFocused) editor.value.commands.focus();
+});
 </script>
 
 <template>
