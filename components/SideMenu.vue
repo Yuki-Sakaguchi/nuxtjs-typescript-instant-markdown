@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { PlusIcon, TrashIcon } from "@heroicons/vue/24/outline";
 const config = useAppConfig();
 
 const displayList = [
@@ -30,13 +31,13 @@ const displayList = [
     <button
       class="bg-white text-gray-800 w-full py-2 rounded-tr-md rounded-bl-md transition-opacity hover:opacity-80"
     >
-      追加
+      <PlusIcon class="w-[20px] m-auto" />
     </button>
     <template v-if="displayList.length > 0">
       <button
         class="mt-2 bg-white text-gray-800 w-full py-2 rounded-tr-md rounded-bl-md transition-opacity hover:opacity-80"
       >
-        削除
+        <TrashIcon class="w-[20px] m-auto" />
       </button>
     </template>
     <div class="flex-1 mt-4 overflow-scroll">

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { TrashIcon } from "@heroicons/vue/24/outline";
+
 interface Props {
   id: string;
   title: string;
@@ -15,6 +17,8 @@ const props = defineProps<Props>();
     >
       {{ title }}
     </button>
-    <button class="p-2">削除</button>
+    <button class="p-2">
+      <TrashIcon class="w-[16px]" />
+    </button>
   </li>
 </template>
