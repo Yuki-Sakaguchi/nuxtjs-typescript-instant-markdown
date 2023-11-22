@@ -79,20 +79,20 @@ export const useList = defineStore("list", () => {
     list.value = [];
   }
 
-  // watchEffect(() => {
-  //   if (isEnable.value) return;
-  //   const data = getContent();
-  //   if (data != null) {
-  //     list.value = [...data];
-  //   }
-  //   isEnable.value = true;
-  // });
+  onMounted(() => {
+    if (isEnable.value) return;
+    const data = getContent();
+    if (data != null) {
+      list.value = [...data];
+    }
+    isEnable.value = true;
+  });
 
-  // watch(list.value, () => {
-  //   if (!isEnable) return;
-  //   if (list == null) return;
-  //   localStorage.setItem(keyName, JSON.stringify(list, null, 2));
-  // });
+  watch(list, () => {
+    if (!isEnable.value) return;
+    if (list.value == null) return;
+    localStorage.setItem(keyName, JSON.stringify(list.value, null, 2));
+  });
 
   return {
     list,
