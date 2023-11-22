@@ -80,12 +80,13 @@ watch([selectedItem, editor], () => {
 </script>
 
 <template>
-  <template v-if="selectedItem == null">
+  <template v-if="editor == null || selectedItem == null">
     <div class="h-full flex justify-center items-center">
       <AboutView />
     </div>
   </template>
   <template v-else>
+    <EditorHeader :editor="editor" />
     <div id="editor" class="relative h-full pl-4">
       <template v-if="editor">
         <div class="overflow-scroll relative h-full flex flex-col pt-16 pb-4">

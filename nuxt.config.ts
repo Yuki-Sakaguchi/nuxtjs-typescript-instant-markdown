@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     strict: true,
     typeCheck: true,
   },
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/main.css", "remixicon/fonts/remixicon.css"],
   postcss: {
     plugins: {
       "postcss-custom-media": {},

@@ -33,6 +33,7 @@
     "date-fns": "^2.30.0",
     "pinia": "^2.1.7",
     "postcss-custom-media": "^10.0.2",
+    "remixicon": "^3.5.0",
     "uuid": "^9.0.1"
   }
 }
