@@ -8,10 +8,16 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
+      "postcss-custom-media": {},
+      "tailwindcss/nesting": {},
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+  imports: {
+    dirs: ["stores/**"],
+  },
+  modules: ["@pinia/nuxt"],
   components: [
     {
       path: "@/components",

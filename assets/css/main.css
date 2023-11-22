@@ -1,3 +1,122 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@custom-media --phone (min-width: 544px);
+@custom-media --tablet (min-width: 768px);
+@custom-media --desktop (min-width: 992px);
+@custom-media --desktop-lg (min-width: 1200px);
+
+/* Basic editor styles */
+.ProseMirror {
+  outline: none;
+  height: 100%;
+  color: #242424;
+  padding-right: 1rem;
+
+  @media (--tablet) {
+    padding-right: 52px;
+  }
+
+  p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.4;
+  }
+
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1.6em;
+    font-weight: bold;
+  }
+
+  h4 {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+
+  h5 {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  h6 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  ul {
+    list-style: disc;
+    line-height: 1.8;
+  }
+
+  ol {
+    list-style: num;
+    line-height: 1.8;
+  }
+
+  code {
+    background-color: rgba(#616161, 0.1);
+    color: #616161;
+  }
+
+  pre {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(#0d0d0d, 0.1);
+    margin: 2rem 0;
+  }
+}
