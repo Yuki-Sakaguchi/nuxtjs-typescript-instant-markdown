@@ -5,7 +5,11 @@ export default defineNuxtConfig({
     strict: true,
     typeCheck: true,
   },
-  css: ["~/assets/css/main.css", "remixicon/fonts/remixicon.css"],
+  css: [
+    "~/assets/css/main.css",
+    "remixicon/fonts/remixicon.css",
+    "vue-final-modal/style.css",
+  ],
   postcss: {
     plugins: {
       "postcss-custom-media": {},

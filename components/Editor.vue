@@ -5,18 +5,26 @@ import { useEditor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import TiptapImage from "@tiptap/extension-image";
+
+import { ModalsContainer, useModal } from "vue-final-modal";
+import CommandModal from "@/components/CommandModal.vue";
+
 import { format } from "date-fns";
+
 import { handleDropImage } from "@/utils/ImageLoader";
 
 const updateTimer = ref<NodeJS.Timeout>();
 const cursorPoint = ref(0);
-const isOpenModal = ref(false);
 
 const store = useList();
 const { selectedItem } = storeToRefs(store);
 const { removeItem, onChange } = store;
 
 const { isComposing } = useComposing();
+
+const { open, close } = useModal({
+  component: CommandModal,
+});
 
 const editor = useEditor({
   extensions: [
@@ -99,7 +107,7 @@ watch([selectedItem, editor], () => {
             </button>
             <button
               class="mt-5 transition-opacity opacity-50 hover:opacity-100"
-              @click="isOpenModal = true"
+              @click="() => open()"
             >
               <ExclamationCircleIcon class="w-[20px]" />
             </button>
@@ -114,6 +122,7 @@ watch([selectedItem, editor], () => {
             <hr class="w-[200px] mt-4 border-0 border-dashed border-t-2" />
           </div>
           <EditorContent class="flex-1" :editor="editor" />
+          <ModalsContainer />
         </div>
       </template>
     </div>
