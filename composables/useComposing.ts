@@ -1,8 +1,6 @@
 /**
  * IMEかどうかを判定する
  */
-import { ref, onMounted, onUnmounted } from "vue";
-
 export function useComposing() {
   const isComposing = ref(false);
 
